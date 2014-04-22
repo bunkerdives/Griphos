@@ -12,6 +12,7 @@ console.log("Waiting for requests...");
 routes["create-route"] = function (req, res) {
     fs.readFile(__dirname + '/create-route.html', function (err, data) {
         if (err) throw err;
+        console.log(data);
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data, 'utf8');
         res.end();
@@ -25,8 +26,10 @@ routes["go-to-the-created-route"] = function (req, res) {
 
 // Get the request url and split it to get the inputted value
 var reqPath = req.url;
+console.log(req.url);
 var splitPath = reqPath.split("=");
 var routeName = splitPath[(splitPath.length - 1)]; // outputs the value entered into text input
+console.log(routeName);
 var routeNameMD5  = crypto.createHash('md5').update(routeName).digest('hex');
 
 
